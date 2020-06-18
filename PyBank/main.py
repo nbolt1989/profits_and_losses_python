@@ -1,15 +1,4 @@
 #---------PyBank_Challenge-----------
-#-----------INSTRUCTIONS--------
-'''In this challenge, you are tasked with creating a Python script for analyzing the financial records of your company. 
-You will give a set of financial data called budget_data.csv. The dataset is composed of two columns: Date and Profit/Losses. 
-(Thankfully, your company has rather lax standards for accounting so the records are simple.)
-Your task is to create a Python script that analyzes the records to calculate each of the following:
-    The total number of months included in the dataset - DONE
-    The net total amount of "Profit/Losses" over the entire period - DONE
-    The average OF THE CHANGES in "Profit/Losses" over the entire period - DONE
-    The greatest increase in profits (date and amount) over the entire period -DONE
-    The greatest decrease in losses (date and amount) over the entire period -DONE'''
-
 # I will need to import os ans csv to begin
 import os, csv
 
@@ -52,14 +41,12 @@ print(f"Average Change: {round(sum(monthly_prof_change)/len(monthly_prof_change)
 print(f"Greatest Increase in Profits: {total_months[max_greatest_prof]} (${(str(max_greatest))})")
 print(f"Greatest Decrease in Profits: {total_months[max_lowest_prof]} (${(str(max_lowest))})")
 
-
-
     #--------Output to File---------#
 #create a text file
 
 
 file = open("analysisoutput.txt","w+")
-file_path = os.path.join('..','PyBank','Analysis','analysisoutput.txt')
+#file_path = os.path.join('..','PyBank','Analysis','analysisoutput.txt')
 
 
 file.write("Financial Analysis\n")
