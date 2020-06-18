@@ -43,18 +43,14 @@ print(f"Greatest Decrease in Profits: {total_months[max_lowest_prof]} (${(str(ma
 #--------Output to File---------#
 #create a text file
 
-
 file = open("analysisoutput.txt","w+")
 #file_path = os.path.join('..','PyBank','Analysis','analysisoutput.txt')
 
-
-file.write("Financial Analysis\n")
-file.write("------------------\n")
-file.write(f"Total Months: {len(total_months)}\n")
-file.write(f"Total: ${months}\n")
-file.write(f"Average Change: {round(sum(monthly_prof_change)/len(monthly_prof_change),2)}\n")
-file.write(f"Greatest Increase in Profits: {total_months[max_greatest_prof]} (${(str(max_greatest))})\n")
-file.write(f"Greatest Decrease in Profits: {total_months[max_lowest_prof]} (${(str(max_lowest))})\n")
-
+file.write(
+f"Financial Analysis\n ------------------\nTotal Months: {len(total_months)}\nAverage Change: {round(sum(monthly_prof_change)/len(monthly_prof_change),2)}\n"
+)
+file.write(
+f"Greatest Increase in Profits: {total_months[max_greatest_prof]} (${(str(max_greatest))})\nGreatest Decrease in Profits: {total_months[max_lowest_prof]} (${(str(max_lowest))})\n"
+)
 file.close()
 
