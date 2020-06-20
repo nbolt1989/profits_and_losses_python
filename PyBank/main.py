@@ -1,5 +1,5 @@
-#---------PyBank_Challenge-----------
-# I will need to import os ans csv to begin
+#---------PyBank-----------
+# I will need to import os and csv to begin
 import os, csv
 
 # create a csvpath
@@ -15,7 +15,7 @@ months = 0
 #---Loop through [0] and [1] to find to the total net profit and append it to my empty list variables above---
 with open (bank_csv) as csvfile:  
     reader = csv.reader(csvfile, delimiter=',')
-    header = next(reader)                           #skip the header                  
+    header = next(reader)                #skip the header                  
     for row in reader:                              #Cycle through each row in the csvfile
         months += int(row[1])                       #for every row, add each row to the total
         total_months.append(row[0])                 #append the total number of months to open list variable
@@ -42,12 +42,15 @@ print(f"Greatest Decrease in Profits: {total_months[max_lowest_prof]} (${(str(ma
 
 #--------Output to File---------#
 #create a text file
-
+#import os.path
+#file_path = os.path.join('..','PyBank','Analysis')
+#Define outPath and create new file
 file = open("analysisoutput.txt","w+")
+
 #file_path = os.path.join('..','PyBank','Analysis','analysisoutput.txt')
 
 file.write(
-f"Financial Analysis\n ------------------\nTotal Months: {len(total_months)}\nAverage Change: {round(sum(monthly_prof_change)/len(monthly_prof_change),2)}\n"
+f"Financial Analysis\n ------------------\nTotal Months: {len(total_months)}\nTotal: ${months}\nAverage Change: {round(sum(monthly_prof_change)/len(monthly_prof_change),2)}\n"
 )
 file.write(
 f"Greatest Increase in Profits: {total_months[max_greatest_prof]} (${(str(max_greatest))})\nGreatest Decrease in Profits: {total_months[max_lowest_prof]} (${(str(max_lowest))})\n"
