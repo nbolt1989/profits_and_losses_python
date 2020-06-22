@@ -12,7 +12,6 @@ csvpoll = os.path.join('..','PyPoll','Resources','ElectionDataPyPoll.csv')
 # Make sure I add them here if new variables/lists are needed down the line to keep my code organized
 total_votes = []
 candidates = []
-#manualcandidates = ["Khan","Correy","Li","O'Tooley"]
 khanvotes = []
 correyvotes = []
 livotes = []
@@ -22,7 +21,7 @@ total = 0
 winning_count =0
 #----Open-----
 #I am opening up the csv file and reading it
-with open (csvpoll,'+r') as csvfile:
+with open (csvpoll,'r') as csvfile:
 #assign to a variable and then delimit at the ,
     reader = csv.reader(csvfile, delimiter=',')
 #skip the header
@@ -73,7 +72,7 @@ mydict = {"Khan": len(khanvotes),"Correy":len(correyvotes), "Li": len(livotes), 
 # I need to use the max function through my dictionary
 maxvalue = max(mydict.values())  # maximum value
 # Loop through my dictionary and I will need to set up a conditional to find votes greater than winning count. This will find the highest number of votes and spit
-#out the candidate. 
+#out the candidate. I worked with a tutor on this for loop to capture the winner from mydict. 
 for candidate in mydict:
     votes = mydict.get(candidate)
     if (votes > winning_count):
