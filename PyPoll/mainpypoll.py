@@ -79,23 +79,15 @@ for candidate in mydict:
         winning_count=votes
         winning_candidate = candidate
     
-   
-#--------Final Print Statements-------#
+   #--------Final Print Statements-------#
 print("Election Results\n" + "------------------\n")
 print(f"Total Votes: {len(total_votes)}\n------------------")
 print(f'{a}: {khanpercent}% ({len(khanvotes)})\n{b}: {correypercent}% ({len(correyvotes)})\n{c}: {round((lipercent),2)}% ({len(livotes)})\n{d}: {otooleyvotespercent}% ({len(otooleyvotes)})')
 print("------------------")
 print(f'Winner: {winning_candidate}')
 print("------------------")
-
 #--------Output to File---------#
-#create a text file
-#import os.path
-#file_path = os.path.join('..','PyBank','Analysis')
 file = open("Analysis/pollanalysisoutput.txt","w+")
-
-#file_path = os.path.join('..','PyBank','Analysis','analysisoutput.txt')
-
 file.write("Election Results\n")
 file.write("------------------\n")
 file.write(f"Total Votes: {len(total_votes)}\n")
@@ -104,5 +96,4 @@ file.write(f'{a}: {khanpercent}% ({len(khanvotes)})\n{b}: {correypercent}% ({len
 file.write("------------------\n")
 file.write(f'Winner: {winning_candidate}\n')
 file.write("------------------\n")
-
 file.close()
