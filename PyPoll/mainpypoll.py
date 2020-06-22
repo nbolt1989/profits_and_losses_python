@@ -1,25 +1,26 @@
 #---------PyPoll---------
-#Instructions: see GitLab: 
+#Instructions: see GitLabL UNC BC
 #----import/join-------
 #I will need to bring the os and csv like in PyBank
 import os, csv
 #create csv path and assign to a variable
 csvpoll = os.path.join('..','PyPoll','Resources','ElectionDataPyPoll.csv')
 
-#----variables/lists------
+#----Variables/Lists------
 #I am going the list and conditional route so I will need to build out a few empty lists and variables
 # this is a little clunky 
 # Make sure I add them here if new variables/lists are needed down the line to keep my code organized
 total_votes = []
 candidates = []
+#manualcandidates = ["Khan","Correy","Li","O'Tooley"]
 khanvotes = []
 correyvotes = []
 livotes = []
 otooleyvotes = []
 candidatesvoteslist = []
 total = 0
-
-#----open-----
+winning_count =0
+#----Open-----
 #I am opening up the csv file and reading it
 with open (csvpoll,'+r') as csvfile:
 #assign to a variable and then delimit at the ,
@@ -30,11 +31,12 @@ with open (csvpoll,'+r') as csvfile:
     for row in reader:
         total_votes.append(row[0])               
         candidates.append(row[2]) 
+
 # I can print out a list of unique items in row[2] to find there are four unique candidates
 # The candidates list has now been filled. I am now running a for loop through candidates and looking for each individual 
 #candidate
-# I am going primarily ith conditionals and lists as opposed to lists and dictionaries for practice. I will likely create a new
-# script utilizing dictionaries and loops more. 
+# I am going primarily with conditionals and lists as opposed to lists and dictionaries for practice. I will likely create a new
+# script utilizing dictionaries and loops down the road. But for now, you get conditionals.
     for row in (candidates):
 #search for Khan and append the count to khanvotes
         if row == "Khan":
@@ -43,7 +45,6 @@ with open (csvpoll,'+r') as csvfile:
 # print statement below
             total += 1
             khanvotes.append(total)
-            #print(len(khanvotes))
 #repeat for each candidate
         elif row == "Correy":
             b = "Correy"
@@ -57,6 +58,7 @@ with open (csvpoll,'+r') as csvfile:
             d = "O'Tooley"
             total += +1
             otooleyvotes.append(total)
+
 # I could do an else here and make another list to catch any other items but I know the four candidates so it is unneccessary
 # Now that I have caught all my candidates and their votes I need to compare their votes to the total vote count
 # in order to find the percentage--make sure to multiply by 100 and round. 
@@ -68,12 +70,15 @@ otooleyvotespercent = round(int(len(otooleyvotes))/int(len(total_votes)),3)*100
 # of votes. 
 #I am assigning candidate name to Key and the length of their votes as the Value. 
 mydict = {"Khan": len(khanvotes),"Correy":len(correyvotes), "Li": len(livotes), "O'Tooley": len(otooleyvotes)}
-# I need to use the max function, which I used Stack Overflow as a resource in order to find out how, in order to 
-# determine the winner. Resource:
-#https://stackoverflow.com/questions/42044090/return-the-maximum-value-from-a-dictionary/42044202
+# I need to use the max function through my dictionary
 maxvalue = max(mydict.values())  # maximum value
-# I need to determine my max key; value pairs so this function will search through and find the max value.
-maxkeys = [c for c, v in mydict.items() if v == maxvalue]
+# Loop through my dictionary and I will need to set up a conditional to find votes greater than winning count. This will find the highest number of votes and spit
+#out the candidate. 
+for candidate in mydict:
+    votes = mydict.get(candidate)
+    if (votes > winning_count):
+        winning_count=votes
+        winning_candidate = candidate
     
    
 #--------Final Print Statements-------#
@@ -81,14 +86,14 @@ print("Election Results\n" + "------------------\n")
 print(f"Total Votes: {len(total_votes)}\n------------------")
 print(f'{a}: {khanpercent}% ({len(khanvotes)})\n{b}: {correypercent}% ({len(correyvotes)})\n{c}: {round((lipercent),2)}% ({len(livotes)})\n{d}: {otooleyvotespercent}% ({len(otooleyvotes)})')
 print("------------------")
-print(f'Winner: {maxkeys}')
+print(f'Winner: {winning_candidate}')
 print("------------------")
 
 #--------Output to File---------#
 #create a text file
 #import os.path
 #file_path = os.path.join('..','PyBank','Analysis')
-file = open("pollanalysisoutput.txt","w+")
+file = open("Analysis/pollanalysisoutput.txt","w+")
 
 #file_path = os.path.join('..','PyBank','Analysis','analysisoutput.txt')
 
@@ -98,7 +103,7 @@ file.write(f"Total Votes: {len(total_votes)}\n")
 file.write("------------------\n")
 file.write(f'{a}: {khanpercent}% ({len(khanvotes)})\n{b}: {correypercent}% ({len(correyvotes)})\n{c}: {round((lipercent),2)}% ({len(livotes)})\n{d}: {otooleyvotespercent}% ({len(otooleyvotes)})\n')
 file.write("------------------\n")
-file.write(f'Winner: {maxkeys}\n')
+file.write(f'Winner: {winning_candidate}\n')
 file.write("------------------\n")
 
 file.close()

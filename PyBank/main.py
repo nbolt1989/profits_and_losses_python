@@ -15,17 +15,19 @@ months = 0
 #---Loop through [0] and [1] to find to the total net profit and append it to my empty list variables above---
 with open (bank_csv) as csvfile:  
     reader = csv.reader(csvfile, delimiter=',')
-    header = next(reader)                #skip the header                  
-    for row in reader:                              #Cycle through each row in the csvfile
-        months += int(row[1])                       #for every row, add each row to the total
+#skip the header     
+    header = next(reader)   
+#Cycle through each row in the csvfile                          
+    for row in reader:    
+# for every row, add each row to the total                          
+        months += int(row[1])                       
         total_months.append(row[0])                 #append the total number of months to open list variable
         total_profit.append(row[1])                 #append the total profit from row[1] to open list variable
-    for row in range(len(total_profit)-1):          #for the range in the length of total profit minus one since we are calculating the average rate of change (85 instead of 86)
-        #append the formula for total profit between two months minus the one month
+    for row in range(len(total_profit)-1):          
+#for the range in the length of total profit minus one since we are calculating the average rate of change (85 instead of 86)
+#append the formula for total profit between two months minus the one month
         monthly_prof_change.append(int(total_profit[row+1])-int(total_profit[row]))     
-                                                    #print(f"Average Change: {round(sum(monthly_prof_change)/len(monthly_prof_change),2)}")  
-                                                    #formula for printing avg change, I will put down below where I want to print all my statements
-                                                    #Now I need to find the largest increase and decrease from the monthly_prof_change list
+#Now I need to find the largest increase and decrease from the monthly_prof_change list
         max_greatest = max(monthly_prof_change)     #setting a max variable 
         max_lowest = min(monthly_prof_change)       #setting a min increase variable
         max_greatest_prof = monthly_prof_change.index(max(monthly_prof_change)) + 1     #this will search through mpf and find the index where the greatest profit is
@@ -45,7 +47,7 @@ print(f"Greatest Decrease in Profits: {total_months[max_lowest_prof]} (${(str(ma
 #import os.path
 #file_path = os.path.join('..','PyBank','Analysis')
 #Define outPath and create new file
-file = open("analysisoutput.txt","w+")
+file = open("Analysis/analysisoutput.txt","w+")
 
 #file_path = os.path.join('..','PyBank','Analysis','analysisoutput.txt')
 
